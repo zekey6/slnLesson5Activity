@@ -45,48 +45,48 @@ namespace prjLesson5Activity
             txtPagibig.Text = "200";
 
             double sss = grossIncome * 0.05;
-            double philHealth = grossIncome * 0.025;
-            double pagIbig = 200;
+            double philhealth = grossIncome * 0.025;
+            double pagibig = 200;
 
             txtSSS.Text = sss.ToString("N2");
-            txtPhilHealth.Text = philHealth.ToString("N2");
-            txtPagibig.Text = pagIbig.ToString("N2");
-            double taxableIncome = grossIncome - (sss + philHealth + pagIbig);
+            txtPhilHealth.Text = philhealth.ToString("N2");
+            txtPagibig.Text = pagibig.ToString("N2");
+            double taxableIncome = (grossIncome * 12);
 
-            double incomeTax = 0;
+            double incomeTax;
 
 
             if (taxableIncome > 250000 && taxableIncome <= 400000)
             {
                 // Bracket: Over 250k - 400k Annual (15% of excess over 20,833.33 monthly)
-                incomeTax = (taxableIncome - 250000) * 0.15;
+                incomeTax = ((taxableIncome - 250000) * 0.15) / 12;
             }
             else if (taxableIncome >= 400001 && taxableIncome <= 800000)
             {
                 // Bracket: Over 400k - 800k Annual (1,875 fixed + 20% of excess over 33,333.33)
-                incomeTax = 22500 + (taxableIncome - 400000) * 0.20;
+                incomeTax = 22500 + ((taxableIncome - 400000) * 0.20)/12;
             }
             else if (taxableIncome >= 800001 && taxableIncome <= 2000000)
             {
                 // Bracket: Over 800k - 2M Annual (8,541.67 fixed + 25% of excess over 66,666.67)
-                incomeTax = 102500 + (taxableIncome - 800000) * 0.25;
+                incomeTax = 102500 + ((taxableIncome - 800000) * 0.25)/12;
             }
             else if (taxableIncome >= 2000001 && taxableIncome <= 8000000)
             {
                 // Bracket: 2M to 8M (8,541.67 fixed + 25% of excess over 66,666.67)
-                incomeTax = 402500 + (taxableIncome - 2000000) - 0.30;
+                incomeTax = 402500 + ((taxableIncome - 2000000) - 0.30)/12;
             }
             else if (taxableIncome <= 8000001)
             {
                 // 250k and below annually is 0% tax
-                incomeTax = 2202500 + (taxableIncome - 8000000) - 0.35;
+                incomeTax = 2202500 + ((taxableIncome - 8000000) - 0.35)/12;
             }
             else
             {
                 incomeTax = 0;
             }
 
-            txtTax.Text = incomeTax.ToString("C");
+            txtTax.Text = incomeTax.ToString("N2");
         }
 
         private void btnNetIncome_Click(object sender, EventArgs e)
@@ -102,10 +102,10 @@ namespace prjLesson5Activity
             double grossIncome = GetVal(txtGrossIncome);
 
             // 2. REGULAR DEDUCTIONS
-            double sss = GetVal(txtSSS);
-            double philhealth = GetVal(txtPhilHealth);
-            double pagibig = GetVal(txtPagibig);
-            double tax = GetVal(txtTax);
+            double a = GetVal(txtSSS);
+            double b = GetVal(txtPhilHealth);
+            double c = GetVal(txtPagibig);
+            double d = GetVal(txtTax);
 
             // 3. OTHER DEDUCTIONS (Safely handles empty boxes)
             double sssLoan = GetVal(txtSSSLoan);
@@ -116,9 +116,9 @@ namespace prjLesson5Activity
             double otherLoan = GetVal(txtOtherLoan);
 
             // 4. CALCULATIONS
-            double totalDeductions = sss + philhealth + pagibig + tax +
+            double totalDeductions = a + b + c + d +
                                      sssLoan + pagibigLoan + savingsDeposit +
-                                     savingsLoan + salaryLoan + otherLoan;
+                                     savingsLoan + salaryLoan + otherLoan ;
 
             double netIncome = grossIncome - totalDeductions;
 
@@ -133,7 +133,7 @@ namespace prjLesson5Activity
             string employeeNumber = txtEmployeeNumber.Text;
             if (employeeNumber == "202511340")
             {
-                txtDepartment.Text = "College of CCIT";
+                txtDepartment.Text = "College of Law";
                 txtFirstName.Text = "John Edward";
                 txtMiddleName.Text = "Tamayo";
                 txtSurname.Text = "Pascual";
