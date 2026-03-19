@@ -31,7 +31,7 @@ namespace prjLesson5Activity
             double honorIncome = honorRate * honorHours;
             txtHonorIncome.Text = honorIncome.ToString();
 
-            // OTHER
+            // OTHER            
             double otherRate = Convert.ToDouble(txtOtherRate.Text);
             double otherHours = Convert.ToDouble(txtOtherHours.Text);
             double otherIncome = otherRate * otherHours;
@@ -56,24 +56,33 @@ namespace prjLesson5Activity
             double incomeTax = 0;
 
 
-            if (taxableIncome > 20833.33 && taxableIncome <= 33333.33)
+            if (taxableIncome > 250000 && taxableIncome <= 400000)
             {
                 // Bracket: Over 250k - 400k Annual (15% of excess over 20,833.33 monthly)
-                incomeTax = (taxableIncome - 20833.33) * 0.15;
+                incomeTax = (taxableIncome - 250000) * 0.15;
             }
-            else if (taxableIncome > 33333.33 && taxableIncome <= 66666.67)
+            else if (taxableIncome >= 400001 && taxableIncome <= 800000)
             {
                 // Bracket: Over 400k - 800k Annual (1,875 fixed + 20% of excess over 33,333.33)
-                incomeTax = 1875 + (taxableIncome - 33333.33) * 0.20;
+                incomeTax = 22500 + (taxableIncome - 400000) * 0.20;
             }
-            else if (taxableIncome > 66666.67 && taxableIncome <= 166666.67)
+            else if (taxableIncome >= 800001 && taxableIncome <= 2000000)
             {
                 // Bracket: Over 800k - 2M Annual (8,541.67 fixed + 25% of excess over 66,666.67)
-                incomeTax = 8541.67 + (taxableIncome - 66666.67) * 0.25;
+                incomeTax = 102500 + (taxableIncome - 800000) * 0.25;
             }
-            else if (taxableIncome <= 20833.33)
+            else if (taxableIncome >= 2000001 && taxableIncome <= 8000000)
+            {
+                // Bracket: 2M to 8M (8,541.67 fixed + 25% of excess over 66,666.67)
+                incomeTax = 402500 + (taxableIncome - 2000000) - 0.30;
+            }
+            else if (taxableIncome <= 8000001)
             {
                 // 250k and below annually is 0% tax
+                incomeTax = 2202500 + (taxableIncome - 8000000) - 0.35;
+            }
+            else
+            {
                 incomeTax = 0;
             }
 
